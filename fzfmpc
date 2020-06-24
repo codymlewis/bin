@@ -1,0 +1,11 @@
+#!/bin/bash
+
+artist="$(mpc list Artist | fzf)"
+
+[[ $artist = "" ]] && exit
+
+title="$(mpc list Title Artist "$artist" | fzf)"
+
+[[ $title = "" ]] && exit
+
+mpc searchplay Artist "$artist" Title "$title"

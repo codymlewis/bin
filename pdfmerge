@@ -1,0 +1,20 @@
+#!/bin/bash
+
+a=$(echo "$@" | sed 's/\s/%20/g' | sed 's/.pdf%20/.pdf /g')
+
+rm combine.pdf
+touch combine.pdf
+
+echo "" | ps2pdf -sPAPERSIZE=a4 - /tmp/blank.pdf
+
+for file in $a; do
+        mv combine.pdf /tmp/temp.pdf
+        gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=combine.pdf -dBATCH /tmp/temp.pdf "${file//\%20/ }"
+        pages=$(pdfinfo combine.pdf | awk '/Pages:/{ print $2   }')
+        if [ `expr $pages % 2` -eq 1  ]; then
+                mv combine.pdf /tmp/temp.pdf
+                gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=combine.pdf -dBATCH /tmp/temp.pdf /tmp/blank.pdf
+        fi
+done
+
+rm /tmp/temp.pdf

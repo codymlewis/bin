@@ -1,0 +1,26 @@
+#!/bin/sh
+
+primary="eDP1"
+
+other_mons="$(xrandr | awk '/\sconnected\s[^p]/{ print $1 }')"
+
+mon="$(printf "%s" "$other_mons" | rofi -dmenu -p 'Which monitor')"
+
+dir=$(printf "Right\nLeft\nMirror\nAbove\nBelow\nOff" | rofi -dmenu -p 'Which direction')
+
+case "$dir" in
+        "Right")
+                xrandr --output "$mon" --auto --right-of "$primary" ;;
+        "Left")
+                xrandr --output "$mon" --auto --left-of "$primary" ;;
+        "Mirror")
+                xrandr --output "$mon" --auto --same-as "$primary" ;;
+        "Above")
+                xrandr --output "$mon" --auto --above "$primary" ;;
+        "Below")
+                xrandr --output "$mon" --auto --below "$primary" ;;
+        "Off")
+                xrandr --output "$mon" --off ;;
+esac
+
+xwallpaper --center "$HOME/.config/wallpaper.png"

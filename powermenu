@@ -1,0 +1,16 @@
+#!/bin/bash
+# A power handling script using rofi
+
+PWR_OPT=$(echo -e "Cancel\nExit WM\nShutdown\nReboot"  | rofi -dmenu -i -p "What would you like to do?" -l 4)
+
+case $PWR_OPT in
+    "Exit WM")
+        xsetroot -name "fsignal:1"
+    ;;
+    "Shutdown")
+        shutdown -h now
+    ;;
+    "Reboot")
+        reboot
+    ;;
+esac

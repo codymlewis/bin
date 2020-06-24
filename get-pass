@@ -1,0 +1,8 @@
+#!/bin/sh
+
+a=$(ls "$HOME/.password-store" | rofi -dmenu -p "What website do you want a password for")
+[ $(ls "$HOME/.password-store/$a" | wc -l) = 1 ] &&
+        b=$(ls "$HOME/.password-store/$a" | sed 's/\.gpg//') ||
+        b=$(ls "$HOME/.password-store/$a" | sed 's/\.gpg//' | rofi -dmenu "Which account do you want a password for")
+
+(tpm show "$a/$b" | xsel -p) && (echo "$a" | xsel -b)  && notify-send "Password for $a/$b copied to clipboard"

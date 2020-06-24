@@ -1,0 +1,7 @@
+#!/bin/sh
+
+[ $# = 3 ] &&
+        a=$(pwgen -1 $1) &&
+        echo "$a" | tpm insert "$2/$3" &&
+        echo "$a" | xsel ||
+        echo "Usage: new-pass <passlen> <website> <username>"

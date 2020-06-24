@@ -1,0 +1,19 @@
+#!/bin/sh
+
+cap=$(cat /sys/class/power_supply/BAT0/capacity)
+if grep 'Discharging' /sys/class/power_supply/BAT0/status > /dev/null; then
+	if [ "$cap" -lt 20 ]; then
+		baticon=""
+	elif [ "$cap" -lt  40 ]; then
+		baticon=""
+	elif [ "$cap" -lt 60 ]; then
+		baticon=""
+	elif [ "$cap" -lt 80 ]; then
+		baticon=""
+	else
+		baticon=""
+	fi
+else
+	baticon=""
+fi
+printf "%s %s " "$baticon" "$cap"

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+[ -z "$1"  ] && { "$BROWSER"; exit;  }
+
+
+case "$1" in
+        *mkv|*webm|*mp4|*hooktube.com*|*bitchute.com*|*mp3|*flac|*opus|*mp3?source)
+                mpv -quiet "$1" >/dev/null 2>&1 ;;
+        *youtube.com/watch*|*youtube.com/playlist*|*youtu.be*)
+                q=$(printf "480\n720\nMax" | fzf)
+                ([ "$q" = Max ] &&
+                        mpv --ytdl-format='bestvideo+bestaudio' "$1") ||
+                        mpv --ytdl-format="bestvideo[height<=$q]+bestaudio[ext=m4a]" "$1"
+                ;;
+        *png|*jpg|*jpe|*jpeg|*gif)
+                curl -sL "$1" > "/tmp/$(echo "$1" | sed "s/.*\///")" && sxiv -a "/tmp/$(echo "$1" | sed "s/.*\///")"  >/dev/null 2>&1 & ;;
+        *)
+                if [ -f "$1" ]; then "$TERMINAL" -e "$EDITOR $1"
+		else setsid -f "$BROWSER" "$1" >/dev/null 2>&1; fi ;;
+esac

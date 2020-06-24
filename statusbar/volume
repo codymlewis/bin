@@ -1,0 +1,20 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+        1) setsid "$TERMINAL" -e pulsemixer & ;;
+esac
+
+vol=$(amixer get Master | awk -F'[][]' 'END{ print $2 }' | sed 's/%//g')
+is_muted=$(amixer get Master | grep 'off')
+if [ "$is_muted" ]; then
+        printf " "
+else
+        if [ "$vol" -gt 50 ]; then
+                vol=" $vol"
+        elif [ "$vol" -gt 0 ]; then
+                vol=" $vol"
+        else
+                vol=" $vol"
+        fi
+        printf "%s " "$vol"
+fi

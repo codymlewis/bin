@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd "$HOME/Desktop/University/Research/Manager" &&
+        ./manager.py

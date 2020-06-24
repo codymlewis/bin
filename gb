@@ -1,0 +1,11 @@
+#!/bin/sh
+
+case $1 in
+    on)
+        bluetoothctl power on
+        bluetoothctl connect D8:55:75:2A:EE:AC
+    ;;
+    off)
+        bluetoothctl power off
+    ;;
+esac

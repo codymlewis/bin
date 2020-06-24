@@ -1,0 +1,6 @@
+#!/bin/bash
+
+[ $# -lt 1 ] && printf "Usage: md2pdf <filename>\n" && exit
+
+o=${1/\.md/.pdf}
+pandoc -o "$o" "$1" && zathura "$o"
