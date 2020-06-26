@@ -1,0 +1,11 @@
+#!/bin/sh
+
+
+case $BUTTON in
+        1) setsid "$TERMINAL" -e ncmpcpp & ;;
+esac
+
+mpc_status=$(mpc status)
+
+printf "%s" "$mpc_status" | grep 'playing' > /dev/null && \
+        printf " %s" "$mpc_status" | head -n1

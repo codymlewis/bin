@@ -1,0 +1,5 @@
+#!/bin/sh
+
+brightness=$(xbacklight | sed 's/\\..*//')
+
+printf "%4.1f%%" "$brightness"

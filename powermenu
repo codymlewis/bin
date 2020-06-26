@@ -1,7 +1,6 @@
 #!/bin/bash
-# A power handling script using rofi
 
-PWR_OPT=$(echo -e "Cancel\nExit WM\nShutdown\nReboot"  | rofi -dmenu -i -p "What would you like to do?" -l 4)
+PWR_OPT=$(echo -e "Cancel\nExit WM\nShutdown\nReboot"  | dmenu -i -p "What would you like to do?" -l 4)
 
 case $PWR_OPT in
     "Exit WM")

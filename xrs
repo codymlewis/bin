@@ -4,9 +4,9 @@ primary="eDP1"
 
 other_mons="$(xrandr | awk '/\sconnected\s[^p]/{ print $1 }')"
 
-mon="$(printf "%s" "$other_mons" | rofi -dmenu -p 'Which monitor')"
+mon="$(printf "%s" "$other_mons" | dmenu -p 'Which monitor')"
 
-dir=$(printf "Right\nLeft\nMirror\nAbove\nBelow\nOff" | rofi -dmenu -p 'Which direction')
+dir=$(printf "Right\nLeft\nMirror\nAbove\nBelow\nOff" | dmenu -p 'Which direction')
 
 case "$dir" in
         "Right")

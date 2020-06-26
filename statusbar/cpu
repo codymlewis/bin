@@ -1,0 +1,8 @@
+#!/bin/sh
+
+case $BUTTON in
+        1) setsid "$TERMINAL" -e htop & ;;
+esac
+
+usage=$(top -b -n 1 | grep Cpu | awk '{print $2}')
+printf "%4.1f%% " "$usage"

@@ -16,4 +16,4 @@ if grep 'Discharging' /sys/class/power_supply/BAT0/status > /dev/null; then
 else
 	baticon=""
 fi
-printf "%s %s " "$baticon" "$cap"
+printf "%s %s%% " "$baticon" "$cap"

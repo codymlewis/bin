@@ -1,0 +1,11 @@
+#!/bin/sh
+
+case $BUTTON in
+        1) setsid "$TERMINAL" -e htop & ;;
+esac
+
+
+mem="$(free -h | grep Mem)"
+free="$(echo "$mem" | awk '{print $3}')"
+total="$(echo "$mem" | awk '{print $2}')"
+printf "%s/%s " "$free" "$total"

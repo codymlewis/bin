@@ -1,0 +1,11 @@
+#!/bin/bash
+
+artist="$(mpc list Artist | dmenu -p 'Choose an Artist')"
+
+[[ $artist = "" ]] && exit
+
+title="$(mpc list Title Artist "$artist" | dmenu -p 'Choose a Song')"
+
+[[ $title = "" ]] && exit
+
+mpc searchplay Artist "$artist" Title "$title"
